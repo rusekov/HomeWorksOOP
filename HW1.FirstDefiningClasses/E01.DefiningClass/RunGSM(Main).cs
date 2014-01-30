@@ -1,33 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-class Program
+﻿namespace DefineGSM
 {
-    static void Main()
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    internal class RunGsm
     {
-        //string iPhone = "iPhone";
-        //string apple = "Apple";
-        //string ivan = "Ivan";
-        
-        Battery panasonic = new Battery(BatteryModel.LiPo2400);
-        Display samsung = new Display(7, "16M");
+        internal static void Main()
+        {
+            // tests
+            string iphone = "iPhone";
+            string apple = "Apple";
+            string ivan = "Ivan";
 
-        //GSM gsm = new GSM(iPhone, apple, 10, ivan, panasonic, samsung);
-        ////GSM promo = new GSM("Nokia 1010", "Nokia"); // tva ne raboti
+            Battery panasonic = new Battery(BatteryModel.LiPo2400);
+            Display samsung = new Display(7, "16M");
 
-        //Console.WriteLine(gsm.ToString());
-        object itelfon = GSM.iPhone4S;
+            GSM gsm = new GSM(iphone, apple, 10, ivan, panasonic, samsung);
+            Console.WriteLine(gsm.ToString());
+            
+            GSM promo = new GSM("Nokia 1010", "Nokia");
+            Console.WriteLine(promo.ToString());
 
-        Console.WriteLine(itelfon.ToString());
-        //Console.WriteLine(promo.ToString());
+            object itelfon = GSM.PhoneiPhone4S;
+            Console.WriteLine(itelfon.ToString());
 
-        //GSMtest.TestGSM();
+            object newitelfon = new GSM(string.Empty, string.Empty).IPhone4S;
 
-        Call somecall = new Call(DateTime.Now, "+333553444", 59);
+            GSMtest.TestGSM();
 
-        GSMCallHistoryTest.TestFunctionality();
+            Call somecall = new Call(DateTime.Now, "+333553444", 59);
+
+            GSMCallHistoryTest.TestFunctionality();
+        }
     }
 }

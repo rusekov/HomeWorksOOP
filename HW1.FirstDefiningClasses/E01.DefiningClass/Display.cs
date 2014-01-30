@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
+﻿namespace DefineGSM
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
 
-    class Display
+    internal class Display
     {
         private double? size;
         private string numberOFColours;
+
         public Display()
         {
         }
@@ -21,8 +24,12 @@ using System.Text.RegularExpressions;
 
         public double? Size
         {
-            get { return this.Size; }
-            private set 
+            get 
+            { 
+                return this.size; 
+            }
+
+            private set
             {
                 if (value < 1 || value > 10)
                 {
@@ -32,29 +39,35 @@ using System.Text.RegularExpressions;
                 this.size = value;
             }
         }
+
         public string Colors
         {
-            get { return this.numberOFColours; }
+            get 
+            { 
+                return this.numberOFColours; 
+            }
+
             private set
             {
                 bool valid = Regex.IsMatch(value, @"^\d+[a-z]*", RegexOptions.IgnoreCase);
+        
                 if (valid)
                 {
                     this.numberOFColours = value;
                 }
                 else
                 {
-                    throw new ArgumentException(String.Format("Phone display can not have {0} coulours", value));
+                    throw new ArgumentException("Phone display can not have {0} coulours", value);
                 }
             }
         }
-               
+
         public string Model
         {
-            get 
+            get
             {
-                return String.Format("{0} inches, {1} colors", this.size, this.numberOFColours);
+                return string.Format("{0} inches, {1} colors", this.size, this.numberOFColours);
             }
         }
-
     }
+}
