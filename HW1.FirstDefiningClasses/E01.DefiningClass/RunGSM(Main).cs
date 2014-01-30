@@ -31,7 +31,7 @@
 
             GSMtest.TestGSM();
 
-            Call somecall = new Call(DateTime.Now, "+333553444", 59);
+            Call somecall = new Call(DateTime.Now, "+33 35 53444", 59);
 
             GSMCallHistoryTest.TestFunctionality();
         }

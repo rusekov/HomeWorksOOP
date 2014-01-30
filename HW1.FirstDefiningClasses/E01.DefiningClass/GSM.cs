@@ -46,7 +46,7 @@
     
         public List<Call> CallHistory
         {
-            get { return this.callHistory; }
+            get { return new List<Call>(this.callHistory); }
             private set { this.callHistory = value; }
         }
 
@@ -193,10 +193,16 @@
 
         public void PrintCallHistory()
         {
+            Console.WriteLine("...............................\nCall History:\n");
             int index = 1;
             foreach (Call call in this.CallHistory)
             {
                 Console.WriteLine("\nCall: {0}\nOn Date: {1} \nTo: {2} \nDuration (sec):{3}\n", index++, call.DateAndTime, call.PhoneNumber, call.CallDuratiin);
+            }
+
+            if (index == 1)
+            {
+                Console.WriteLine("Empty");
             }
         }
 

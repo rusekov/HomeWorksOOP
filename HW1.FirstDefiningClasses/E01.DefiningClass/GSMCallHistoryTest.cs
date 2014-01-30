@@ -38,6 +38,7 @@
             Console.WriteLine(nokia1102.CurrentBill(0.37M));
 
             nokia1102.ClearCallHistory();
+
             nokia1102.PrintCallHistory();
         }
     }
