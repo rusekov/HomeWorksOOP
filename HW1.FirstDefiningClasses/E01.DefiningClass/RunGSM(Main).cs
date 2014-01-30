@@ -24,10 +24,10 @@
             GSM promo = new GSM("Nokia 1010", "Nokia");
             Console.WriteLine(promo.ToString());
 
-            object itelfon = GSM.PhoneiPhone4S;
+            GSM itelfon = GSM.IPhone4S;
             Console.WriteLine(itelfon.ToString());
 
-            object newitelfon = new GSM(string.Empty, string.Empty).IPhone4S;
+            object newitelfon = GSM.IPhone4S;
 
             GSMtest.TestGSM();
 

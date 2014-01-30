@@ -10,8 +10,8 @@
     internal class GSM
     {
         //// static iPhone
-        internal static GSM PhoneiPhone4S = new GSM("iPhone4s", "Apple", 1000, "Mtel", new Battery(BatteryModel.LiPo2400), new Display(3.7, "16.5M"));
-        
+        ////private static GSM iphone4S; 
+    
         private string model;
         private string manifacturer;
         private decimal? price;
@@ -39,15 +39,15 @@
             this.display = displayModel;
         }
 
+        public static GSM IPhone4S
+        {
+            get { return new GSM("iPhone4s", "Apple", 1000, "Mtel", new Battery(BatteryModel.LiPo2400), new Display(3.7, "16.5M")); }
+        }
+    
         public List<Call> CallHistory
         {
             get { return this.callHistory; }
             private set { this.callHistory = value; }
-        }
-       
-        public GSM IPhone4S
-        {
-            get { return PhoneiPhone4S; }
         }
 
         public decimal? Price
@@ -83,15 +83,22 @@
 
             private set
             {
-                bool valid = Regex.IsMatch(value, @"^[a-z1-9]+", RegexOptions.IgnoreCase);
-
-                if (valid)
+                if (value == null)
                 {
-                    this.model = value;
+                    this.model = null;
                 }
                 else
                 {
-                    throw new ArgumentException("The phone model description could contain only latin chars and digits", value);
+                    bool valid = Regex.IsMatch(value, @"^[a-z1-9]+", RegexOptions.IgnoreCase);
+
+                    if (valid)
+                    {
+                        this.model = value;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("The phone model description could contain only latin chars and digits", value);
+                    }
                 }
             }
         }
@@ -105,15 +112,22 @@
 
             private set
             {
-                bool valid = Regex.IsMatch(value, @"^[a-z1-9]+", RegexOptions.IgnoreCase);
-
-                if (valid)
+                if (value == null)
                 {
-                    this.manifacturer = value;
+                    this.manifacturer = null;
                 }
                 else
                 {
-                    throw new ArgumentException("The manifacturer description could contain only latin chars and digits", value);
+                    bool valid = Regex.IsMatch(value, @"^[a-z1-9]+", RegexOptions.IgnoreCase);
+
+                    if (valid)
+                    {
+                        this.manifacturer = value;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("The manifacturer description could contain only latin chars and digits", value);
+                    }
                 }
             }
         }
@@ -127,15 +141,22 @@
 
             private set
             {
-                bool valid = Regex.IsMatch(value, @"^[a-z1-9]+", RegexOptions.IgnoreCase); // owner could be company like "Generic2013"
-
-                if (valid)
+                if (value == null)
                 {
-                    this.owner = value;
+                    this.owner = null;
                 }
                 else
                 {
-                    throw new ArgumentException("The owner description could contain only latin chars and digits", value);
+                    bool valid = Regex.IsMatch(value, @"^[a-z1-9]+", RegexOptions.IgnoreCase); // owner could be company like "Generic2013"
+
+                    if (valid)
+                    {
+                        this.owner = value;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("The owner description could contain only latin chars and digits", value);
+                    }
                 }
             }
         }
