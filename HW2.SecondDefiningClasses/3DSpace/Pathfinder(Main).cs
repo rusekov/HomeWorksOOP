@@ -5,7 +5,7 @@
 
     internal class Pathfinder
     {                
-        public static void Main(string[] args)
+        public static void Main()
         {
             Point firstPoint = new Point(1, 2, 3);
             Console.WriteLine(firstPoint.ToString());
@@ -19,7 +19,7 @@
             double distanceFirstSecond = Distance.Calculate(firstPoint, secondPoint);
             Console.WriteLine(distanceFirstSecond);
 
-            Path somePath = new Path();
+            Path somePath = new Path(firstPoint, secondPoint, zeroPoint, new Point(12, 12, 12));
             somePath.AddPoint(zeroPoint);
             somePath.AddPoint(firstPoint);
             somePath.AddPoint(secondPoint);

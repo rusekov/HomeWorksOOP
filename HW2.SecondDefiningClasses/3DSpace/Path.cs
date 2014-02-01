@@ -16,6 +16,15 @@ namespace The3DSpace
             this.listOfPoints = new List<Point>();
         }
 
+        public Path(params Point[] points)
+            : this()
+        {
+            for (int i = 0; i < points.Length; i++)
+            {
+                this.listOfPoints.Add(points[i]);
+            }
+        }
+
         public List<Point> ListOfPoints
         {
             get { return new List<Point>(this.listOfPoints); }

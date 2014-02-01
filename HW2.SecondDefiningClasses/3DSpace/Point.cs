@@ -11,7 +11,7 @@ namespace The3DSpace
 
     public struct Point
     {
-        private static Point zeroCoordinates;
+        public static readonly Point ZeroCoordinates = new Point(0, 0, 0);
 
         public Point(int x, int y, int z)
             : this()
@@ -20,13 +20,6 @@ namespace The3DSpace
             this.Y = y;
             this.Z = z;
         }
-
-        public static Point ZeroCoordinates
-        {
-            get { return zeroCoordinates; }
-
-            private set { zeroCoordinates = new Point(0, 0, 0); }
-        }  
  
         public int X { get; private set; }
         
