@@ -14,7 +14,10 @@
 
 //// check for bugs (index++ // i < index // i <= index)
 
-//// 6. Implement auto-grow functionality: when the internal array is full, create a new array of double size and move all elements to it.
+////6.Implement auto-grow functionality:when the internal array is full,create a new array of double size and move all elements to it.
+
+//// 7. Create generic methods Min<T>() and Max<T>() for finding the minimal and maximal element in the  GenericList<T>. 
+//// You may need to add a generic constraints for the type T.
 
 namespace GenericList
 {
@@ -23,6 +26,7 @@ namespace GenericList
     using System.Text;
 
     public class TList<T>
+    where T : IComparable
     {
         private const int DefaultCapacity = 32;
 
@@ -36,11 +40,6 @@ namespace GenericList
 
         public TList() : this(DefaultCapacity)
         {
-        }
-
-        public T[] AsArray 
-        {
-            get { return this.array; } //// this is not protected!
         }
 
         public int Count
@@ -61,7 +60,35 @@ namespace GenericList
                 return result; 
             }           
         }
-            
+
+        public T Max()
+        {
+            T result = this.array[0];
+            for (int i = 1; i < this.array.Length; i++)
+            {
+                if (this.array[i].CompareTo(this.array[i - 1]) > 0)
+                {
+                    result = this.array[i];
+                }
+            }
+
+            return result;
+        }
+
+        public T Min()
+        {
+            T result = this.array[0];
+            for (int i = 1; i < this.array.Length; i++)
+            {
+                if (this.array[i].CompareTo(this.array[i - 1]) < 0)
+                {
+                    result = this.array[i];
+                }
+            }
+
+            return result;
+        }
+
         public void Add(T element)
         {
             if (this.index < this.array.Length)
