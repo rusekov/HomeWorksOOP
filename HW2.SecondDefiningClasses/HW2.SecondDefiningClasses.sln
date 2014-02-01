@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E01E04.3DSpace", "3DSpace\E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E05E07.GenericList", "GenericList\E05E07.GenericList.csproj", "{52FED22D-0559-4DC0-B6DC-0D3BC55780C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E08E10.GenericMatrix", "GenericMatrix\E08E10.GenericMatrix.csproj", "{86A31D00-241C-4F4B-A588-35B2D7630914}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{52FED22D-0559-4DC0-B6DC-0D3BC55780C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52FED22D-0559-4DC0-B6DC-0D3BC55780C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52FED22D-0559-4DC0-B6DC-0D3BC55780C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86A31D00-241C-4F4B-A588-35B2D7630914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86A31D00-241C-4F4B-A588-35B2D7630914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86A31D00-241C-4F4B-A588-35B2D7630914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86A31D00-241C-4F4B-A588-35B2D7630914}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -39,18 +39,6 @@
             PathStorage.Load(reloadPath);
 
             reloadPath.ShowPath();
-
-            //// Testing ListOfPoints class
-
-            Console.WriteLine("\nListOfPoints is equal to List<Point> (just another way to implement Path):");
-            ListOfPoints testPath = new ListOfPoints();
-            testPath.Add(zeroPoint);
-            testPath.Add(secondPoint);
-
-            foreach (var item in testPath)
-            {
-                Console.WriteLine(item.ToString());
-            }
         }
     }
 }
