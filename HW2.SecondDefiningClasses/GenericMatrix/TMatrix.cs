@@ -8,27 +8,23 @@
 namespace GenericMatrix
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
 
     public class TMatrix<T>
-        where T : struct
+        where T : struct                                        //// anythig else here???
     {
         private const int DefaultRows = 8;
         private const int DefaultCols = 8;
 
-        private int maxRows;
-        private int maxCols;
-
+        private int rows;
+        private int cols;
         private T[,] matrix;
 
-        public TMatrix(int maxRows, int maxCols)
+        public TMatrix(int rows, int cols)
         {
-            this.maxRows = maxRows;
-            this.maxCols = maxCols;
-            this.matrix = new T[this.maxRows, this.maxCols];
+            this.Rows = rows;
+            this.Cols = cols;
+            this.matrix = new T[this.rows, this.cols];
         }
 
         public TMatrix()
@@ -36,21 +32,52 @@ namespace GenericMatrix
         {
         }
 
-        public int MaxRows
+        public int Rows
         {
-            get { return this.maxRows; }
+            get 
+            { 
+                return this.rows; 
+            }
+            
+            private set
+            {
+                if (value > 0)
+                {
+                    this.rows = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Matrix could have only positive dimentions");
+                }
+            }
         }
 
-        public int MaxCols
+        public int Cols
         {
-            get { return this.maxCols; }
+            get 
+            { 
+                return this.cols; 
+            }
+
+            private set
+            {
+                if (value > 0)
+                {
+                    this.cols = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Matrix could have only positive dimentions");
+                }
+            }
         }
 
-        public T this[int row, int col] // this is how to make indexing
+        // create indexing
+        public T this[int row, int col]
         {
             get
             {
-                if (row < 0 || row >= this.maxRows || col < 0 || col >= this.maxCols)
+                if (row < 0 || row >= this.rows || col < 0 || col >= this.cols)
                 {
                     throw new IndexOutOfRangeException(string.Format("Index [{0},{1}] out of range!", row, col));
                 }
@@ -61,19 +88,24 @@ namespace GenericMatrix
 
             set
             {
+                if (row < 0 || row >= this.rows || col < 0 || col >= this.cols)
+                {
+                    throw new IndexOutOfRangeException(string.Format("Index [{0},{1}] out of range!", row, col));
+                }
+
                 this.matrix[row, col] = value;
             }
         }
 
         public static TMatrix<T> operator +(TMatrix<T> m1, TMatrix<T> m2)
         {
-            if (m1.MaxCols == m2.MaxCols && m1.MaxRows == m2.MaxRows)
+            if (m1.Cols == m2.Cols && m1.Rows == m2.Rows)
             {
-                dynamic result = new TMatrix<T>(); // try dynamic... looks like hack
+                TMatrix<T> result = new TMatrix<T>();
 
-                for (int row = 0; row < m1.MaxRows; row++)
+                for (int row = 0; row < m1.Rows; row++)
                 {
-                    for (int col = 0; col < m1.MaxCols; col++)
+                    for (int col = 0; col < m1.Cols; col++)
                     {
                         dynamic a = m1[row, col];
                         dynamic b = m2[row, col];
@@ -86,19 +118,19 @@ namespace GenericMatrix
             }
             else
             {
-                throw new ArithmeticException("The matrixes should be the same size to apply \"+\" operator");
+                throw new ArithmeticException("The matrices should be the same size to apply \"+\" operator");
             }
         }
 
         public static TMatrix<T> operator -(TMatrix<T> m1, TMatrix<T> m2)
         {
-            if (m1.MaxCols == m2.MaxCols && m1.MaxRows == m2.MaxRows)
+            if (m1.Cols == m2.Cols && m1.Rows == m2.Rows)
             {
-                dynamic result = new TMatrix<T>(); // try dynamic... looks like hack
+                TMatrix<T> result = new TMatrix<T>();
 
-                for (int row = 0; row < m1.MaxRows; row++)
+                for (int row = 0; row < m1.Rows; row++)
                 {
-                    for (int col = 0; col < m1.MaxCols; col++)
+                    for (int col = 0; col < m1.Cols; col++)
                     {
                         dynamic a = m1[row, col];
                         dynamic b = m2[row, col];
@@ -111,24 +143,32 @@ namespace GenericMatrix
             }
             else
             {
-                throw new ArithmeticException("The matrixes should be the same size to apply \"-\" operator");
+                throw new ArithmeticException("The matrices should be the same size to apply \"-\" operator");
             }
         }
 
+        /* For Matrix multiplication see: 
+         * http://www.mathsisfun.com/algebra/matrix-multiplying.html
+         * http://en.wikipedia.org/wiki/Matrix_multiplication
+         */
+
         public static TMatrix<T> operator *(TMatrix<T> m1, TMatrix<T> m2)
         {
-            if (m1.MaxCols == m2.MaxCols && m1.MaxRows == m2.MaxRows)
+            if (m1.Cols == m2.Rows)
             {
-                dynamic result = new TMatrix<T>(); // I dont know math!
+                dynamic result = new TMatrix<T>();
 
-                for (int row = 0; row < m1.MaxRows; row++)
+                for (int m1row = 0; m1row < m1.Rows; m1row++)
                 {
-                    for (int col = 0; col < m1.MaxCols; col++)
+                    for (int m2col = 0; m2col < m2.Cols; m2col++)
                     {
-                        dynamic a = m1[row, col];
-                        dynamic b = m2[row, col];
+                        for (int mem = 0; mem < m1.Cols; mem++)
+                        {
+                            dynamic a = m1[m1row, mem];
+                            dynamic b = m2[mem, m2col];
 
-                        result[row, col] = a * b;
+                            result[m1row, m2col] += a * b;
+                        }                        
                     }
                 }
 
@@ -136,8 +176,40 @@ namespace GenericMatrix
             }
             else
             {
-                throw new ArithmeticException("The matrixes should be the same size to apply \"+\" operator");
-            }
+                throw new ArithmeticException("The matrices are not multipliable. Matrix1.Cols should be equal to Matrix2.Rows");
+            }           
         }  
+
+        public static bool operator false(TMatrix<T> matrix)
+        {
+            for (int row = 0; row < matrix.Rows; row++)
+            {
+                for (int col = 0; col < matrix.Cols; col++)
+                {
+                    if ((dynamic)matrix[row, col] == 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public static bool operator true(TMatrix<T> matrix)
+        {
+            for (int row = 0; row < matrix.Rows; row++)
+            {
+                for (int col = 0; col < matrix.Cols; col++)
+                {
+                    if ((dynamic)matrix[row, col] == 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }

@@ -36,7 +36,7 @@
 
             Console.WriteLine("MinValue = {0}\nMaxValue = {1}\n", minValue, maxValue);
 
-            ////Clear list - Nothing is printed
+            ////Clear list - List is empty & nothing is printed
             somelist.Clear();
             for (int i = 0; i < somelist.Count; i++)
             {
