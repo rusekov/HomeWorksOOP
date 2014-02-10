@@ -12,6 +12,11 @@ using System.Threading;
 
     public class Publish
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void SingleEvent(object sender, Event e)
         {            
             Console.WriteLine("Printed after {0} seconds", e.Seconds);
