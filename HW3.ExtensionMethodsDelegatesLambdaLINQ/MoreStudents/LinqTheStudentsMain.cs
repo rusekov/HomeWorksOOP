@@ -135,7 +135,7 @@
             //// Print: (Marks are represented as string in order to appear here)         
             // studentsWithTwoMarks.ToList().ForEach(Console.WriteLine);
 
-            //// 15. Extract all Marks of the students that enrolled in 2006. (The students from 2006 have 06 as their 5-th and 6-th digit in the FN).
+            //// 15.Extract all Marks of the students that enrolled in 2006. (The students from 2006 have 06 as their 5-th and 6-th digit in the FN).
 
             string marksOfStudentsOlSix = string.Join(
                 ",", 
@@ -162,11 +162,35 @@
             ////Print:
             //matematicians.ToList().ForEach(Console.WriteLine);
             
-            //// 18. Create a program that extracts all students grouped by GroupName and then prints them to the console.  Use LINQ.
+            //// 18.Create a program that extracts all students grouped by GroupName and then prints them to the console.  Use LINQ.
 
-            //// 19. Rewrite the previous using extension methods.
+            var studentsByGroups =
+                from student in listOfStudents
+                group student by student.GroupName.DepartmentName;            
 
+            //// Printing is little ugly cause it looks more like jugged array instead of dictionary
+            //foreach (var course in studentsByGroups)
+            //{
+            //    Console.WriteLine("\n\n<<<<<< {0} >>>>>>\n", course.Key);
+            //    foreach (var student in course)
+            //    {
+            //        Console.WriteLine(student);
+            //    }
+            //}
 
+            //// 19.Rewrite the previous using extension methods.
+
+            var groupsWithStudents = listOfStudents.GroupBy(st => st.GroupName.DepartmentName);            
+            
+            //// Printing is little ugly cause it looks more like jugged array instead of dictionary
+            foreach (var course in groupsWithStudents)
+            {
+                Console.WriteLine("\n\n<<<<<< {0} >>>>>>\n", course.Key);
+                foreach (var student in course)
+                {
+                    Console.WriteLine(student);
+                }
+            }
         }
     }
 }
