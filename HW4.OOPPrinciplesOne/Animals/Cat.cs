@@ -11,7 +11,7 @@
 
         public override string AnimalType
         {
-            get { return AnimalIs; }
+            get { return this.GetType().Name; }
         }
                 
         public override void MakeSound()

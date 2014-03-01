@@ -8,7 +8,7 @@
     {
         public static void Main()
         {
-            List<Student> students = new List<Student>
+            var students = new List<Student>
             {
                 new Student("Ivan", "Popov", 10),
                 new Student("Ivan", "Ivanov", 6),
@@ -22,10 +22,10 @@
                 new Student("Nino", "Tochkov", 4)
             };
 
-            students.OrderBy(st => st.Grade);
+            var sortedListOfStudents = students.OrderBy(st => st.Grade);
 
-            Console.WriteLine("\n<<< Studetns sorted by Grade>>>\n");
-            students.ToList().ForEach(Console.WriteLine);
+            Console.WriteLine("\n<<< Studetns sorted by Grade>>>\n");            
+            sortedListOfStudents.ToList().ForEach(Console.WriteLine);
 
             var workers = new List<Worker>
             {
@@ -41,10 +41,10 @@
                 new Worker("Nino", "Fospodinov", 300, 43)
             };
 
-            workers.OrderByDescending(wo => wo.MoneyPerHour());
+            var sortedListOfWorkers = workers.OrderByDescending(wo => wo.MoneyPerHour());
             
-            Console.WriteLine("\n<<< Workers sorted by $/hour>>>\n");
-            workers.ToList().ForEach(Console.WriteLine);
+            Console.WriteLine("\n<<< Workers sorted by $/hour>>>\n");            
+            sortedListOfWorkers.ToList().ForEach(Console.WriteLine);
 
             List<Human> humans = new List<Human>();
             students.ForEach(humans.Add);

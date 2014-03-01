@@ -1,0 +1,2 @@
+﻿Add implementations of the ICloneable interface. The Clone() method should deeply copy all object's fields into a 
+new object of type Student.
